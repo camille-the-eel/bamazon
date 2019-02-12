@@ -16,3 +16,4 @@ If there is insufficient stock to fulfil the user's response request, the user w
 Given that there is sufficient stock, the database is then updated to reflect the new stock level after the customer has completed their order.
 
 To watch a video of this app in action, follow this link to download a short video: 
+https://github.com/camille-the-eel/bamazon/blob/master/assets/bamazon.mov
