@@ -32,13 +32,9 @@ function start(){
             for (var i = 0; i <res.length; i++) {
                 console.log("Item ID: " + res[i].item_id + "\nProduct: " + res[i].product_name + "\nDepartment: " + res[i].department_name + "\nPrice: " + res[i].price + "\n\n");
             }
-    })
-    // .then(function() {
-    //     userPrompt();
-    // })
-    ;
-
-    userPrompt();
+           
+            userPrompt();
+    });
 }
 
 function userPrompt() {
