@@ -17,7 +17,7 @@ connection.connect(function(err) {
     if (err) {
         throw err;
     }
-    console.log("Connected as ID: " + connection.threadId);
+    // console.log("Connected as ID: " + connection.threadId);
     start();
 });
 
@@ -25,15 +25,13 @@ function start(){
     console.log("\nProduct Listings:\n");
     connection.query(
         "SELECT item_id, product_name, department_name, price, stock_quantity FROM products", function (err, res) {
-            if (err) {
-                throw err;
-            }
-
-            for (var i = 0; i <res.length; i++) {
-                console.log("Item ID: " + res[i].item_id + "\nProduct: " + res[i].product_name + "\nDepartment: " + res[i].department_name + "\nPrice: " + res[i].price + "\n\n");
-            }
-           
-            userPrompt();
+        if (err) {
+            throw err;
+        }
+        for (var i = 0; i <res.length; i++) {
+            console.log("Item ID: " + res[i].item_id + "\nProduct: " + res[i].product_name + "\nDepartment: " + res[i].department_name + "\nPrice: " + res[i].price + "\n\n");
+        }
+        userPrompt();
     });
 }
 
@@ -60,7 +58,7 @@ function userPrompt() {
                 "SELECT product_name, price, stock_quantity FROM products WHERE item_id=?", [item], function (err,res) {
 
                 if (err) {
-                    console.log("Item ID does not exist or invalid input submitted.");
+                    console.log("\n\nItem ID does not exist or invalid input submitted.\n\n");
                     throw err;
                 }
 
@@ -71,24 +69,22 @@ function userPrompt() {
                 if (stock >= units) {
                     var purchaseQty = units;
                     var total = purchaseQty * cost;
-                    console.log("Item #" + item + ": " + purchasing + ", has been added to your cart. Quantity: " + purchaseQty + ". Your total is $" + total + ".");
-                    storeUpdate();
+                    console.log("\n\nItem #" + item + ": " + purchasing + ", has been added to your cart. Quantity: " + purchaseQty + ". Your total is $" + total + ".\n\n");
+                    
+                    var remaining = stock - purchaseQty;
+                    connection.query(
+                        "UPDATE products SET stock_quantity=? WHERE item_id=?", [remaining, item], function (err, res) {
+                        if (err) {
+                            throw err;
+                        }
+                        connection.end();
+                    });
                 } else {
-                    console.log("We're sorry, we could not complete your order. There are only " + stock + " units available of Item #" + item + ": " + purchasing + ".");
+                    console.log("\n\nWe're sorry, we could not complete your order. There are only " + stock + " units available of Item #" + item + ": " + purchasing + ".\n\n");
                     connection.end();
                 }
 
             });
         });
 }
-
-function storeUpdate() {
-    //enough in stock
-        //update mysql quantity
-    //show customer total cost of purchase
-
-    //or error
-    connection.end();
-}
-
 
