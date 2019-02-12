@@ -77,6 +77,7 @@ function userPrompt() {
                         if (err) {
                             throw err;
                         }
+                        console.log("Stock Level: " + remaining + "\n\n");
                         connection.end();
                     });
                 } else {

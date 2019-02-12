@@ -14,3 +14,5 @@ Using a MySQL query, the user response pulls the relevant data from the database
 If there is insufficient stock to fulfil the user's response request, the user will be alerted, and the transaction terminated.
 
 Given that there is sufficient stock, the database is then updated to reflect the new stock level after the customer has completed their order.
+
+To watch a video of this app in action, follow this link to download a short video: 
