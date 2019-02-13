@@ -26,37 +26,26 @@ function start () {
             choices: options  
         }).then(function(answer) {
             
-            if (answer.menu === options[0]) {
+            switch(answer.menu) {
+            case options[0]:
+                console.log("Works");
                 viewProducts();
-            } else if (answer.menu === options[1]) {
+                break;
+            case options[1]:
                 lowInventory();
-            } else if (answer.menu === options[2]) {
+                break;
+            case options[2]:
                 addInventory();
-            } else if (answer.menu === options[3]) {
+                break;
+            case options[3]:
                 newProduct();
-            } else if (answer.menu === options[4]) {
+                break;
+            case options[4]:
                 connection.end();
-            } else {
-                console.log("I'm sorry there has been an error.");
+                break;
+            default:
+            console.log("I'm defaulting");
             }
-
-            // switch(answer.menu) {
-            // case answer.menu === options[0]:
-            //     console.log("Works");
-            //     viewProducts();
-            //     break;
-            // case answer.menu[1]:
-            //     lowInventory();
-            //     break;
-            // case answer[2]:
-            //     addInventory();
-            //     break;
-            // case answer[3]:
-            //     newProduct();
-            //     break;
-            // default:
-            // console.log("I'm defaulting");
-            // }
 
         });
 }
