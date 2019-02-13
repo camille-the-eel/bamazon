@@ -77,12 +77,37 @@ function viewProducts() {
 
 function lowInventory() {
     console.log("\nProducts With Low Inventory:\n");
-    
-    //lists all items with inventory lower than five
+    connection.query(
+        "SELECT item_id, product_name, department_name, price, stock_quantity FROM products WHERE stock_quantity <= 5", function (err, res) {
+        if (err) {
+            throw err;
+        }
+        for (var i = 0; i <res.length; i++) {
+            console.log("Item ID: " + res[i].item_id + "\nProduct: " + res[i].product_name + "\nDepartment: " + res[i].department_name + "\nPrice: " + res[i].price + "\nStock Level: " + res[i].stock_quantity + "\n\n");
+        }
+        start();
+    });
 }
 
 function addInventory() {
-    //prompt to add quantity 
+    inquirer
+        .prompt(
+            {
+            name: "add_stock",
+            type: "input",
+            message: "What is the Item ID of the product you would like to log stock increase?"
+            },
+            {
+            name: "add_qty",
+            type: "input",
+            message: "How many new units would you like to log for this product?"
+            }
+        ).then(function(answer) {
+            connection.query(
+                "SELECT", [answer.add_stock], function (err, res) {
+
+            });
+        });
 }
 
 function newProduct() {
