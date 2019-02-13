@@ -114,16 +114,54 @@ function addInventory() {
                 var totalStock = parseInt(res[0].stock_quantity) + parseInt(answer.add_qty);
 
                 connection.query(
-                "UPDATE products SET stock_quantity WHERE item_id=?", [totalStock, answer.add_stock], function(err,res) {
-                    console.log("\nYour product, " + product + ", stock quantity has been updated.\nStock was: " + prevStock + ".\nStock is now: " + totalStock + ".\n")
-                    connection.end();
+                    "UPDATE products SET stock_quantity WHERE item_id=?", [totalStock, answer.add_stock], function(err,res) {
+                    console.log("\nThe stock quantity of your product, " + product + ", has been updated by " + answer.add_qty + ".\nStock was: " + prevStock + "\nStock is now: " + totalStock + "\n");
+                    start();
                 });
-
-
             });
         });
 }
 
 function newProduct() {
-    //prompt to add new product
+    console.log("To Enter a New Product Into Inventory, Follow The Prompts Below:");
+    connection.query(
+        "SELECT department_name FROM products", function(err, res) {
+        if (err) {
+            throw err;
+        }
+        var departments = [];
+        for (var i = 0; i <res.length; i++) {
+            if (departments.includes(res[i].department_name) === false) {
+                departments.push(res[i].department_name);
+            }
+        }
+        console.log(departments.join("\n"));
+
+    inquirer
+        .prompt ([
+            {
+            name: "add_name",
+            type: "input",
+            message: "Enter the name of your new product: "
+            },
+            {
+            name: "add_dept",
+            type: "list",
+            message: "Select which department your new product belongs in:",
+            choices: departments  
+            },
+            {
+            name: "add_price",
+            type: "input",
+            message: "Enter the price of your new product. Do not include any unit symbols:"
+            },
+            {
+            name: "add_qty",
+            type: "input",
+            message: "Enter the stock quantity of your new product:"
+            }
+            ]).then
+        
+        connection.end();
+    });
 }
