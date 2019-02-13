@@ -91,7 +91,7 @@ function lowInventory() {
 
 function addInventory() {
     inquirer
-        .prompt(
+        .prompt([
             {
             name: "add_stock",
             type: "input",
@@ -102,9 +102,22 @@ function addInventory() {
             type: "input",
             message: "How many new units would you like to log for this product?"
             }
-        ).then(function(answer) {
+        ]).then(function(answer) {
             connection.query(
-                "SELECT", [answer.add_stock], function (err, res) {
+                "SELECT item_id, product_name, department_name, price, stock_quantity FROM products WHERE item_id=?", [answer.add_stock], function (err, res) {
+                if (err) {
+                    throw err;
+                }
+             
+                var totalStock = parseInt(res[0].stock_quantity) + parseInt(answer.add_qty);
+                console.log(totalStock);
+
+                // connection.query(
+                //     "UPDATE products SET stock_quantity WHERE item_id=?", [, answer.add_stock], function(err,res) {
+
+                // })
+
+                // console.log("Item ID: " + res[i].item_id + "\nProduct: " + res[i].product_name + "\nDepartment: " + res[i].department_name + "\nPrice: " + res[i].price + "\nStock Level: " + res[i].stock_quantity + "\n\n");
 
             });
         });
