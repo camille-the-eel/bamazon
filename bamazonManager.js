@@ -108,16 +108,17 @@ function addInventory() {
                 if (err) {
                     throw err;
                 }
-             
+                
+                var product = res[0].product_name;
+                var prevStock = parseInt(res[0].stock_quantity);
                 var totalStock = parseInt(res[0].stock_quantity) + parseInt(answer.add_qty);
-                console.log(totalStock);
 
-                // connection.query(
-                //     "UPDATE products SET stock_quantity WHERE item_id=?", [, answer.add_stock], function(err,res) {
+                connection.query(
+                "UPDATE products SET stock_quantity WHERE item_id=?", [totalStock, answer.add_stock], function(err,res) {
+                    console.log("\nYour product, " + product + ", stock quantity has been updated.\nStock was: " + prevStock + ".\nStock is now: " + totalStock + ".\n")
+                    connection.end();
+                });
 
-                // })
-
-                // console.log("Item ID: " + res[i].item_id + "\nProduct: " + res[i].product_name + "\nDepartment: " + res[i].department_name + "\nPrice: " + res[i].price + "\nStock Level: " + res[i].stock_quantity + "\n\n");
 
             });
         });
