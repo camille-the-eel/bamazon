@@ -1,6 +1,3 @@
-// require("dotenv").config();
-// var pw = require("./pw.js");
-
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
@@ -8,8 +5,7 @@ var inquirer = require("inquirer");
 var connection = mysql.createConnection({
     port:3306,
     user: "root",
-    // password: pw.ROOT_PW,
-    password: "D#vils3rver",
+    password: process.argv[2],
     database: "bamazon"
 });
 
@@ -24,7 +20,7 @@ connection.connect(function(err) {
 function start(){
     console.log("\nProduct Listings:\n");
     connection.query(
-        "SELECT item_id, product_name, department_name, price, stock_quantity FROM products", function (err, res) {
+        "SELECT item_id, product_name, department_name, price FROM products", function (err, res) {
         if (err) {
             throw err;
         }
