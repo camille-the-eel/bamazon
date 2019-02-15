@@ -25,7 +25,7 @@ function start () {
             message: "Please Select What You Would Like To Do From The Menu Below",
             choices: options  
         }).then(function(answer) {
-            
+
             switch(answer.menu) {
             case options[0]:
                 console.log("Works");
@@ -112,7 +112,7 @@ function addInventory() {
 }
 
 function newProduct() {
-    console.log("To Enter a New Product Into Inventory, Follow The Prompts Below:");
+    console.log("\nTo Enter a New Product Into Inventory, Follow The Prompts Below:\n");
     connection.query(
         "SELECT department_name FROM products", function(err, res) {
         if (err) {
@@ -124,7 +124,7 @@ function newProduct() {
                 departments.push(res[i].department_name);
             }
         }
-        console.log(departments.join("\n"));
+        // console.log(departments.join("\n"));
 
     inquirer
         .prompt ([
@@ -149,8 +149,37 @@ function newProduct() {
             type: "input",
             message: "Enter the stock quantity of your new product:"
             }
-            ]).then
+            ]).then(function(answer) {
+
+                // console.log(answer.add_name);
+                // console.log(answer.add_dept);
+                // console.log(answer.add_price);
+                // console.log(answer.add_qty);
+                connection.query(
+                    "INSERT INTO products SET ?", 
+                    {
+                        product_name: answer.add_name,
+                        department_name: answer.add_dept,
+                        price: answer.add_price,
+                        stock_quantity: answer.add_qty
+                    }, 
+                    function(err, res) {
+                        if (err) {
+                            throw err;
+                        }
+                    connection.end();
+                });
+                connection.query(
+                    "SELECT item_id, product_name, department_name, price, stock_quantity FROM products", function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    var newItem = res[res.length-1];
+                    console.log("\nYou have added: \nProduct: " + newItem.product_name + "\nDepartment: " + newItem.department_name + "\nPrice: " + newItem.price + "\nStock Level: " + newItem.stock_quantity + "\n\n");
+                    start();
+                })
+            });
         
-        connection.end();
+        // connection.end();
     });
 }
