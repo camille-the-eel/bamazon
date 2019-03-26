@@ -12,7 +12,7 @@ connection.connect(function(err) {
     if (err) {
         throw err;
     }
-    console.log("Connected as ID: " + connection.threadId);
+    // console.log("Connected as ID: " + connection.threadId);
     start();
 });
 
@@ -28,7 +28,6 @@ function start () {
 
             switch(answer.menu) {
             case options[0]:
-                console.log("Works");
                 viewProducts();
                 break;
             case options[1]:
@@ -103,7 +102,10 @@ function addInventory() {
                 var totalStock = parseInt(res[0].stock_quantity) + parseInt(answer.add_qty);
 
                 connection.query(
-                    "UPDATE products SET stock_quantity WHERE item_id=?", [totalStock, answer.add_stock], function(err,res) {
+                    "UPDATE products SET stock_quantity=? WHERE item_id=?", [totalStock, answer.add_stock], function(err, res) {
+                    if (err) {
+                        throw err;
+                    }
                     console.log("\nThe stock quantity of your product, " + product + ", has been updated by " + answer.add_qty + ".\nStock was: " + prevStock + "\nStock is now: " + totalStock + "\n");
                     start();
                 });
@@ -162,7 +164,7 @@ function newProduct() {
                         if (err) {
                             throw err;
                         }
-                    connection.end();
+                    // connection.end();
                 });
                 connection.query(
                     "SELECT item_id, product_name, department_name, price, stock_quantity FROM products", function (err, res) {
