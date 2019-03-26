@@ -6,8 +6,8 @@ On the "Bamazon" storefront, customers can view products and make a purchase tha
 
 =======================================================================================
 
-**To use this app, you must provide your own root password as a command line argument.** <br>
-For example:
+**To use this app, you must provide your own root password as a command line argument.**
+- For example:
 - node bamazonCustomer.js password
 
 =======================================================================================
