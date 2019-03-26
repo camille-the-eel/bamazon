@@ -1,10 +1,12 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
 
+var pwd = process.argv[2];
+
 var connection = mysql.createConnection({
     port:3306,
     user: "root",
-    password: "D#vils3rver",
+    password: pwd,
     database: "bamazon"
 });
 
