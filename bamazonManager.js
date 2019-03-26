@@ -150,11 +150,6 @@ function newProduct() {
             message: "Enter the stock quantity of your new product:"
             }
             ]).then(function(answer) {
-
-                // console.log(answer.add_name);
-                // console.log(answer.add_dept);
-                // console.log(answer.add_price);
-                // console.log(answer.add_qty);
                 connection.query(
                     "INSERT INTO products SET ?", 
                     {
@@ -175,11 +170,9 @@ function newProduct() {
                         throw err;
                     }
                     var newItem = res[res.length-1];
-                    console.log("\nYou have added: \nProduct: " + newItem.product_name + "\nDepartment: " + newItem.department_name + "\nPrice: " + newItem.price + "\nStock Level: " + newItem.stock_quantity + "\n\n");
+                    console.log("\nYou have added:  \nProduct: " + newItem.product_name + "\nDepartment: " + newItem.department_name + "\nPrice: " + newItem.price + "\nStock Level: " + newItem.stock_quantity + "\n\n");
                     start();
                 })
             });
-        
-        // connection.end();
     });
 }

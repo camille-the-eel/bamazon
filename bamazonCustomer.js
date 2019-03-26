@@ -3,9 +3,9 @@ var inquirer = require("inquirer");
 
 
 var connection = mysql.createConnection({
-    port:3306,
+    port: 3306,
     user: "root",
-    password: process.argv[2],
+    password: "D#vils3rver",
     database: "bamazon"
 });
 
@@ -73,7 +73,7 @@ function userPrompt() {
                         if (err) {
                             throw err;
                         }
-                        console.log("Stock Level: " + remaining + "\n\n");
+                        console.log("Stock Remaining: " + remaining + "\n\n");
                         connection.end();
                     });
                 } else {
