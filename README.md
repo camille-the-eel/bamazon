@@ -64,7 +64,7 @@ The Manager file begins with an inquirer menu prompt with the following options:
 **Add New Item** prompts the user to input the Product Name, Product Price, and Stock Quantity. For the Product Department, the user selects from the list of existing departments. 
 (The ability to create a department does not reside with the Manager- possible future development of Supervisor application.)
 
-**Exit** ends the connection and terminates the application.
+**Exit** ends the MySQL connection and terminates the application.
 
 ![Bamazon Manager Gif Part 2](assets/bamazonM-2.gif)
 
