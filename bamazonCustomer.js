@@ -2,7 +2,6 @@ var mysql = require("mysql");
 var inquirer = require("inquirer");
 
 var pwd = process.argv[2];
-console.log(pwd);
 
 var connection = mysql.createConnection({
     port: 3306,
