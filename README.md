@@ -37,7 +37,7 @@ Given that there is sufficient stock, the database is then updated to reflect th
 
 =======================================================================================
 
-If there is insufficient stock to fulfil the user's response request, the user will be alerted, and the transaction terminated.
+If there is insufficient stock to fulfill the user's response request, the user will be alerted, and the transaction terminated.
 
 ![Bamazon Customer Gif Part 2](assets/bamazonC-2.gif)
 
