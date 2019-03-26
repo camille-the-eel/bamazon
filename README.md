@@ -6,7 +6,7 @@ On the "Bamazon" storefront, customers can view products and make a purchase tha
 
 =======================================================================================
 
-**To use this app, you must provide your own root password as a command line argument.**
+**To use this app, you must provide your own root password as a command line argument.** <br>
 For example:
 - node bamazonCustomer.js password
 
@@ -16,11 +16,11 @@ For example:
 - Javascript
 - Node.js
 - MySQL
-- npm package <a href="https://www.npmjs.com/package/inquirer">Inquirer</a>, for user interface in the command line
+- <a href="https://www.npmjs.com/package/inquirer">Inquirer</a>, an npm package for user interface in the command line
 
 =======================================================================================
 
-##Customer
+## Customer
 
 Upon running the customer file, the user is provided the product listings, this information is parsed from a MySQL database and handed to the user. 
 
@@ -43,7 +43,7 @@ If there is insufficient stock to fulfil the user's response request, the user w
 
 =======================================================================================
 
-##Manager
+## Manager
 
 The Manager file begins with an inquirer menu prompt with the following options: 
 
